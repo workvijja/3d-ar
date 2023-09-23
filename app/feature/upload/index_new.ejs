@@ -1,0 +1,192 @@
+<div class="py-5 px-3">
+    <div class="container rounded-3 shadow p-3 p-sm-5 d-grid gap-4">
+        <div>
+            <h1 class="text-center fw-bold">Upload</h1>
+            <p class="text-center">Upload 3D cloth product to web for 3D or AR viewing</p>
+        </div>
+        <form class="d-grid gap-5">
+            <div id="store" class="d-grid gap-4">
+                <h4 class="m-0">Store</h4>
+                <div id="store_container" class="d-grid gap-3">
+                    <div>
+                        <label for="store_name" class="form-label">Name</label>
+                        <input id="store_name" name="store_name" type="text" class="form-control" placeholder="store's name">
+                        <div class="error-message text-danger d-none" for="store_name">
+                            <p class="m-0">Please fill input</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="cloth" class="d-grid gap-4">
+                <h4 class="m-0">Cloth</h4>
+                <div id="cloth_container" class="d-grid gap-3">
+                    <div class="row row-cols-1 row-cols-sm-2 gy-2">
+                        <div class="col">
+                            <label for="cloth_name" class="form-label">Name</label>
+                            <input id="cloth_name" name="cloth_name" type="text" class="form-control" placeholder="cloth's name">
+                            <div class="error-message text-danger d-none" for="cloth_name">
+                                <p class="m-0">Please fill input</p>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <label for="cloth_description" class="form-label">Description</label>
+                            <input id="cloth_description" name="cloth_description" type="text" class="form-control" placeholder="cloth's description">
+                            <div class="error-message text-danger d-none" for="cloth_description">
+                                <p class="m-0">Please fill input</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="cloth_thumbnail" class="form-label">Thumbnail</label>
+                        <input id="cloth_thumbnail" name="cloth_thumbnail" class="form-control" type="file"
+                               accept="image/jpg, image/jpeg, image/png">
+                        <div class="error-message text-danger d-none" for="cloth_thumbnail">
+                            <p class="m-0">Please fill input</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="variant" class="d-grid gap-4">
+                <div class="d-inline-flex justify-content-between align-items-center">
+                    <h4 class="m-0">Variants <i id="file-info" class="bi bi-info-circle fs-5" style="cursor: pointer;"></i></h4>
+                    <button type="button" class="btn btn-outline-primary" id="btn-add-row">Add Variant Field</button>
+                </div>
+            </div>
+            <button id="btn-submit" type="submit" class="btn btn-primary">
+                <p class="m-0">Upload <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></p>
+            </button>
+        </form>
+    </div>
+    <div class="modal fade" id="modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <!-- <button type="button" class="btn btn-primary">Understood</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/template" id="link-template">
+    <h2 class="text-center fw-bold mb-4">Copy link or download QR</h2>
+    <div class="input-group mb-4">
+        <input type="text" readonly class="form-control" id="link-input"
+               value="[%= link || '' %]">
+        <div class="input-group-append">
+            <button id="btn-copy-link" class="btn btn-outline-secondary" type="button"><i class="bi bi-clipboard"></i></button>
+        </div>
+    </div>
+    <div class="p-4 border rounded-2 mb-4">
+        <img id="qr-img" crossorigin="anonymous" class="w-100" src="https://api.qrserver.com/v1/create-qr-code/?size=600x600&data=[%= link || '' %]">
+    </div>
+    <a id="btn-download-img" class="btn btn-primary">Download QR</a>
+</script>
+<script type="text/template" id="variant-template">
+    <h6 class="m-0 text-capitalize">[%= title || 'variant' %] [%= (counter + 1).toString() || '' %]</h6>
+    <div>
+        <label for="[%= title || 'variant' %]-[%= counter.toString() || '' %]_name" class="form-label">Name</label>
+        <input id="[%= title || 'variant' %]-[%= counter.toString() || '' %]_name" name="[%= title || 'variant' %]-[%= counter.toString() || '' %]_name"
+               type="text" class="form-control" placeholder="[%= title || 'variant' %]'s name">
+        <div class="error-message text-danger d-none" for="[%= title || 'variant' %]-[%= counter.toString() || '' %]_name">
+            <p class="m-0">Please fill input</p>
+        </div>
+    </div>
+    <div class="row row-cols-1 row-cols-sm-2 gy-2">
+        <div class="col">
+            <label for="[%= title || 'variant' %]-[%= counter.toString() || '' %]_thumbnail" class="form-label">Thumbnail</label>
+            <input id="[%= title || 'variant' %]-[%= counter.toString() || '' %]_thumbnail" name="[%= title || 'variant' %]-[%= counter.toString() || '' %]_thumbnail"
+                   class="form-control" type="file" accept="image/jpg, image/jpeg, image/png" >
+            <div class="error-message text-danger d-none" for="[%= title || 'variant' %]-[%= counter.toString() || '' %]_thumbnail">
+                <p class="m-0">Please fill input</p>
+            </div>
+        </div>
+        <div class="col">
+            <label for="[%= title || 'variant' %]-[%= counter.toString() || '' %]_file" class="form-label">File</label>
+            <input id="[%= title || 'variant' %]-[%= counter.toString() || '' %]_file" name="[%= title || 'variant' %]-[%= counter.toString() || '' %]_file"
+                   class="form-control" type="file" accept=".glb" >
+            <div class="error-message text-danger d-none" for="[%= title || 'variant' %]-[%= counter.toString() || '' %]_file">
+                <p class="m-0">Please fill input</p>
+            </div>
+        </div>
+    </div>
+    [% if (counter !== 0) { %]
+    <div class="d-flex justify-content-end mt-3">
+        <button type="button" class="btn btn-outline-danger" id="btn-delete-[%= counter.toString() || '' %]">Delete Field</button>
+    </div>
+    [% } %]
+</script>
+<script type="text/template" id="guide-template">
+    <div class="d-grid gap-3">
+        <div class="d-grid gap-2">
+            <h4>If you don't have 3D object of your cloth</h4>
+            <ul>
+                <li>Scan your cloth with 3D scanner app. You can use the app from any platform (phone, desktop, etc)</li>
+            </ul>
+        </div>
+        <div class="d-grid gap-2">
+            <h4>Make your 3D object suitable for viewing</h4>
+            <ul>
+                <li>Open <a href="#" onclick="window.open('https://threejs.org/editor/', '_blank')">Three.js Editor</a></li>
+                <li>Click "File" on the top left screen</li>
+                <li>Click "Import"</li>
+                <li>Add the 3D object</li>
+            </ul>
+        </div>
+        <div class="d-grid gap-2">
+            <h4>To help you see better, add lighting</h4>
+            <ul>
+                <li>Click "Add" on the top left screen</li>
+                <li>Click "AmbientLight"</li>
+                <li>Set the color of the light to white, and increase the intensity until you can see the 3D object</li>
+            </ul>
+        </div>
+        <div class="d-grid gap-2">
+            <h4>Make sure your 3D object is already centered</h4>
+            <ul>
+                <li>Find the mesh of the 3D object by clicking the inner part of your 3D object at the right screen</li>
+                <li>Click "Geometry" tab on the right screen</li>
+                <li>Click "center"</li>
+            </ul>
+        </div>
+        <div class="d-grid gap-2">
+            <h4>If you find that your 3D object contains more than one mesh</h4>
+            <ul>
+                <li>Click the inner group that contains meshes of your 3D object</li>
+                <li>Click "Edit" on the top left screen</li>
+                <li>Click "Clone"</li>
+                <li>Delete the previous 3D object</li>
+                <li>Click "Add"</li>
+                <li>Click "Group"</li>
+                <li>Insert the cloned 3d object to the newly added group</li>
+                <li>Set the position and the rotation of the 3d object to make sure that the 3d object is centered</li>
+            </ul>
+        </div>
+        <div class="d-grid gap-2">
+            <h4>Make sure your 3d object is resized correctly</h4>
+            <ul>
+                <li>Set the scale of the 3D object to fit within 2 small square in x and z axis</li>
+                <li>Make sure that all axis of the scale property is the same to maintain the proportion of your 3D object</li>
+            </ul>
+        </div>
+        <div class="d-grid gap-2">
+            <h4>Finished fine tuning your 3D object? Export it</h4>
+            <ul>
+                <li>Delete all object other than the 3D object</li>
+                <li>Click file on the top left screen</li>
+                <li>Click "Export GLB"</li>
+            </ul>
+        </div>
+        <div class="d-grid gap-2">
+            <h4>If you need detailed guide</h4>
+            <p>Please watch the video <a href="#" onclick="window.open('https://youtu.be/HIRelCsXYfE')">linked here</a></p>
+        </div>
+    </div>
+</script>
