@@ -1,0 +1,87 @@
+#overlay {
+    overflow: hidden;
+}
+
+.slider,
+.item > div,
+.spinner,
+.circle,
+img {
+    border-radius: 100%;
+}
+
+.item > div,
+.circle,
+img {
+    width: 100%;
+}
+
+.items, 
+.item > div,
+.circle,
+img {
+    height: 100%;
+}
+
+#cloth,
+#cloth > .items > .item {
+    width: 11.5vh;
+    height: 11.5vh;
+}
+
+#cloth {
+    outline: solid 1vh whitesmoke;
+}
+
+#variant,
+#variant > .items > .item {
+    width: 5vh;
+    height: 5vh;
+}
+
+#variant {
+    outline: solid .6vh whitesmoke;
+}
+
+.items {
+    position: absolute;
+    display: flex;
+}
+
+#cloth > .items {
+    column-gap: 5vh;
+}
+
+#variant > .items {
+    column-gap: 4vh;
+}
+
+#cloth > .items > .item {
+    padding: .5vh;
+    /*margin-right: 5vh;*/
+}
+
+#variant > .items > .item {
+    padding: .5vh;
+    /*margin-right: 4vh;*/
+}
+
+#cloth > .items > .item > div {
+    border: solid .7vh whitesmoke;
+}
+
+#variant > .items > .item > div {
+    border: solid .5vh whitesmoke;
+}
+
+.spinner {
+    background-color: whitesmoke;
+}
+
+img {
+    object-fit: cover;
+}
+
+
+
+

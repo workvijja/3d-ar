@@ -1,0 +1,101 @@
+<div class="py-5 px-3">
+    <div class="container rounded-3 shadow p-3 p-sm-5 d-grid gap-4">
+        <div>
+            <h1 class="text-center fw-bold">Upload</h1>
+            <p class="text-center">Upload object to web for AR viewing</p>
+        </div>
+        <form class="d-grid gap-5">
+            <div id="store" class="d-grid gap-4">
+                <h4 class="m-0">Store</h4>
+                <div id="store-container" class="d-grid gap-3">
+                    <div>
+                        <label for="store-name" class="form-label">Name</label>
+                        <input id="store-name" name="name" type="text" class="form-control" placeholder="Store"
+                        >
+                    </div>
+                </div>
+            </div>
+            <div id="object" class="d-grid gap-4">
+                <h4 class="m-0">3D Object</h4>
+                <div id="object-container" class="d-grid gap-3">
+                    <div class="row row-cols-1 row-cols-sm-2 gy-2">
+                        <div class="col">
+                            <label for="object-name" class="form-label">Name</label>
+                            <input id="object-name" name="name" type="text" class="form-control" placeholder="Object"
+                            >
+                        </div>
+                        <div class="col">
+                            <label for="object-description" class="form-label">Description</label>
+                            <input id="object-description" name="description" type="text" class="form-control"
+                                   placeholder="Description" >
+                        </div>
+                    </div>
+                    <div class="row row-cols-1 row-cols-sm-2 gy-2">
+                        <div class="col">
+                            <div>
+                                <label for="object-thumbnail" class="form-label">Thumbnail</label>
+                                <input id="object-thumbnail" name="thumbnail" class="form-control" type="file"
+                                       accept="image/jpg, image/jpeg, image/png" >
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div>
+                                <label for="object-file" class="form-label">File</label>
+                                <input id="object-file" name="file" class="form-control" type="file" accept=".gltf"
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="texture" class="d-grid gap-4">
+                <div class="d-inline-flex justify-content-between align-items-center">
+                    <h4 class="m-0">Textures</h4>
+                    <button type="button" class="btn btn-outline-primary" id="btn-add-row">Add Texture Field</button>
+                </div>
+                <div id="texture-container" class="d-grid gap-3">
+                    <h6 class="m-0">Texture 1</h6>
+                    <div>
+                        <label for="texture-name" class="form-label">Name</label>
+                        <input id="texture-name" name="name" type="text" class="form-control" placeholder="Texture 1"
+                        >
+                    </div>
+                    <div class="row row-cols-1 row-cols-sm-2 gy-2">
+                        <div class="col">
+                            <label for="texture-thumbnail" class="form-label">Thumbnail</label>
+                            <input id="texture-thumbnail" name="thumbnail" class="form-control" type="file"
+                                   accept="image/jpg, image/jpeg, image/png" >
+                        </div>
+                        <div class="col">
+                            <label for="texture-file" class="form-label">File</label>
+                            <input id="texture-file" name="file" class="form-control" type="file"
+                                   accept="image/jpg, image/jpeg, image/png" >
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button id="btn-submit" type="submit" class="btn btn-primary">
+                <span id="btn-submit-text">Upload</span>
+                <span class="spinner-border spinner-border-sm ms-2" style="display: none" role="status"
+                      aria-hidden="true"></span>
+            </button>
+        </form>
+    </div>
+    <div class="modal fade" id="modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <!-- <button type="button" class="btn btn-primary">Understood</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
