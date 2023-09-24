@@ -25,11 +25,11 @@ app.set('port', port);
  * Create HTTP server.
  */
 __dirname
-const key = fs.readFileSync(path.join(__dirname, 'localhost.decrypted.key'))
-const cert = fs.readFileSync(path.join(__dirname, 'localhost.crt'))
+// const key = fs.readFileSync(path.join(__dirname, 'localhost.decrypted.key'))
+// const cert = fs.readFileSync(path.join(__dirname, 'localhost.crt'))
 
-var server = https.createServer({key, cert}, app);
-// var server = http.createServer(app);
+// var server = https.createServer({key, cert}, app);
+var server = http.createServer(app);
 
 /**
  * Listen on provided port, on all network interfaces.

@@ -22,7 +22,7 @@ const convert_file = (type, file) => {
         old_path: file.filepath,
         new_path: path.join(folder[type], `${shortid.generate()}.${file.originalFilename.split(".").pop()}`)
     }
-    const directories = file_object.new_path.split("\\")
+    const directories = file_object.new_path.split(path.sep)
     const save_path = "/" + directories.slice(directories.indexOf("items")).join("/")
 
     return {save_path: save_path, file_object: file_object}
